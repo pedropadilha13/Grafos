@@ -11,9 +11,9 @@ import java.util.Scanner;
 public class TGrafo {
     // Atributos Privados
 
-    private int n; // quantidade de vértices
+    private final int n; // quantidade de vértices
     private int m; // quantidade de arestas
-    private int adj[][]; //matriz de adjacência
+    private final int[][] adj; //matriz de adjacência
     // Métodos Públicos
 
     public TGrafo(int n) {  // construtor
@@ -137,12 +137,10 @@ public class TGrafo {
             Scanner fileReader = new Scanner(graphFile);
 
             int verticesCount = fileReader.nextInt();
-//            fileReader.nextLine();
 
             TGrafo graph = new TGrafo(verticesCount);
 
             int edgeCount = fileReader.nextInt();
-//            fileReader.nextLine();
 
             int read = 0;
             while (read++ < edgeCount) {
@@ -155,7 +153,7 @@ public class TGrafo {
             return graph;
         } catch (FileNotFoundException e) {
             System.err.println("Erro ao ler arquivo.");
-            e.printStackTrace();
+            // e.printStackTrace();
         }
 
         return null;

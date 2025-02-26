@@ -1,7 +1,5 @@
 package com.pedropadilha.grafos;
 
-import java.net.URL;
-
 /**
  * @author pedropadilha
  */

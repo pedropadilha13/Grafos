@@ -155,7 +155,24 @@ public class Grafos {
          */
         System.out.println("Exercício 8");
 
-//        TGrafoND ndGraph = new TGrafoND();
+        TGrafoND ndGraph = new TGrafoND(4);
+        ndGraph.insereA(0, 1);
+        ndGraph.insereA(0, 2);
+        ndGraph.insereA(2, 1);
+        ndGraph.insereA(2, 3);
+        ndGraph.insereA(1, 3);
+        ndGraph.show();
+
+        System.out.println();
+
+        /*
+         * Exercício 9
+         * Fazer o método degree(int v) que calcula o grau do vértice de um grafo não-dirigido. O método deve ser
+         * implementado na classe TGrafoND que usa matriz de adjacência.
+         */
+        System.out.println("Exercício 9");
+
+
 
         System.out.println();
 

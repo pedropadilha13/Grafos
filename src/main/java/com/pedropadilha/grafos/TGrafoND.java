@@ -44,11 +44,34 @@ public class TGrafoND {
         System.out.println("n: " + n);
         System.out.println("m: " + m);
         for (int i = 0; i < n; i++) {
-            System.out.print("\n");
+            System.out.println();
             for (int j = 0; j < n; j++) {
-//                System.out.printf("adj[%d,%d]= %d ", i, j, adj[i][j]);
                 System.out.print(adj[i][j] + " ");
             }
         }
+        System.out.println();
+    }
+
+    public void removeV(int v) {
+        for (int i = 0; i < this.n; i++) {
+            this.removeA(v, i);
+        }
+    }
+
+    // Retorna o grau do vértice v
+    public int degree(int v) {
+        int degree = 0;
+
+        for (int i = 0; i < this.n; i++) {
+            degree += this.adj[v][i];
+        }
+
+        return degree;
+    }
+
+    // Retorna se o grafo é completo
+    public boolean isComplete() {
+        int totalPossibilities = this.n * (this.n - 1) / 2;
+        return this.m == totalPossibilities;
     }
 }

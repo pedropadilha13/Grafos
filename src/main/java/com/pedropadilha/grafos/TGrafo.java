@@ -118,44 +118,70 @@ public class TGrafo {
         return this.inDegree(v) > 0 && this.outDegree(v) == 0;
     }
 
-    // Retorna se o grafo é simétrico
-    public static boolean isSymmetric(int[][] adj) {
-        for (int i = 0; i < adj.length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (adj[i][j] != adj[j][i]) {
-                    return false;
-                }
-            }
+    // Remove um vértice (todas as arestas relacionadas a ele)
+    public void removeV(int v) {
+        for (int i = 0; i < this.n; i++) {
+            this.removeA(i, v);
+            this.removeA(v, i);
         }
-
-        return true;
     }
 
-    public static TGrafo createFromFile(String path) {
-        try {
-            File graphFile = new File(path);
-            Scanner fileReader = new Scanner(graphFile);
+    public boolean isComplete() {
+        int totalPossibilities = (this.n * this.n) - this.n;
+        return this.m == totalPossibilities;
+    }
 
-            int verticesCount = fileReader.nextInt();
+    public boolean getComplement() {
+        TGrafo complement = new TGrafo(this.n);
 
-            TGrafo graph = new TGrafo(verticesCount);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (this.adj[i][j] == 1) {
 
-            int edgeCount = fileReader.nextInt();
-
-            int read = 0;
-            while (read++ < edgeCount) {
-                int v = fileReader.nextInt();
-                int w = fileReader.nextInt();
-                graph.insereA(v, w);
             }
+        }
+    }
+}
 
-            fileReader.close();
-            return graph;
-        } catch (FileNotFoundException e) {
-            System.err.println("Erro ao ler arquivo.");
-            // e.printStackTrace();
+// Retorna se o grafo é simétrico
+public static boolean isSymmetric(int[][] adj) {
+    for (int i = 0; i < adj.length; i++) {
+        for (int j = 0; j < i; j++) {
+            if (adj[i][j] != adj[j][i]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+public static TGrafo createFromFile(String path) {
+    try {
+        File graphFile = new File(path);
+        Scanner fileReader = new Scanner(graphFile);
+
+        int verticesCount = fileReader.nextInt();
+
+        TGrafo graph = new TGrafo(verticesCount);
+
+        int edgeCount = fileReader.nextInt();
+
+        int read = 0;
+        while (read++ < edgeCount) {
+            int v = fileReader.nextInt();
+            int w = fileReader.nextInt();
+            graph.insereA(v, w);
         }
 
-        return null;
+        fileReader.close();
+        return graph;
+    } catch (FileNotFoundException e) {
+        System.err.println("Erro ao ler arquivo.");
+        // e.printStackTrace();
     }
+
+    return null;
+}
+
 }

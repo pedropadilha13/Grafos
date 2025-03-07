@@ -268,8 +268,24 @@ public class Grafos {
          */
         System.out.println("\nExercício 14");
 
+        System.out.println("Grafo direcionado:");
+        g.show();
+        System.out.println("Complemento do grafo:");
+        TGrafo complementoD = g.getComplement();
+        complementoD.show();
 
+        System.out.println("Grafo não direcionado:");
+        ndGraph.show();
+        System.out.println("Complemento do grafo:");
+        TGrafoND complementoND = ndGraph.getComplement();
+        complementoND.show();
 
+        /*
+         * Exercício 15
+         * Fazer um método que retorne o tipo de conexidade de um grafo não direcionado
+         * (0 - conexo ou 1 - não conexo – desconexo).
+         */
+        System.out.println("\nExercício 15");
 
     }
 }

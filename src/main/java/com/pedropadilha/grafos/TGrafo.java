@@ -131,57 +131,60 @@ public class TGrafo {
         return this.m == totalPossibilities;
     }
 
-    public boolean getComplement() {
+    public TGrafo getComplement() {
         TGrafo complement = new TGrafo(this.n);
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                if (this.adj[i][j] == 1) {
-
+                if (this.adj[i][j] == 0) {
+                    complement.insereA(i, j);
+                }
             }
         }
-    }
-}
 
-// Retorna se o grafo é simétrico
-public static boolean isSymmetric(int[][] adj) {
-    for (int i = 0; i < adj.length; i++) {
-        for (int j = 0; j < i; j++) {
-            if (adj[i][j] != adj[j][i]) {
-                return false;
+        return complement;
+    }
+
+
+    // Retorna se o grafo é simétrico
+    public static boolean isSymmetric(int[][] adj) {
+        for (int i = 0; i < adj.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (adj[i][j] != adj[j][i]) {
+                    return false;
+                }
             }
         }
+
+        return true;
     }
 
-    return true;
-}
+    public static TGrafo createFromFile(String path) {
+        try {
+            File graphFile = new File(path);
+            Scanner fileReader = new Scanner(graphFile);
 
-public static TGrafo createFromFile(String path) {
-    try {
-        File graphFile = new File(path);
-        Scanner fileReader = new Scanner(graphFile);
+            int verticesCount = fileReader.nextInt();
 
-        int verticesCount = fileReader.nextInt();
+            TGrafo graph = new TGrafo(verticesCount);
 
-        TGrafo graph = new TGrafo(verticesCount);
+            int edgeCount = fileReader.nextInt();
 
-        int edgeCount = fileReader.nextInt();
+            int read = 0;
+            while (read++ < edgeCount) {
+                int v = fileReader.nextInt();
+                int w = fileReader.nextInt();
+                graph.insereA(v, w);
+            }
 
-        int read = 0;
-        while (read++ < edgeCount) {
-            int v = fileReader.nextInt();
-            int w = fileReader.nextInt();
-            graph.insereA(v, w);
+            fileReader.close();
+            return graph;
+        } catch (FileNotFoundException e) {
+            System.err.println("Erro ao ler arquivo.");
+            // e.printStackTrace();
         }
 
-        fileReader.close();
-        return graph;
-    } catch (FileNotFoundException e) {
-        System.err.println("Erro ao ler arquivo.");
-        // e.printStackTrace();
+        return null;
     }
-
-    return null;
-}
 
 }

@@ -74,4 +74,24 @@ public class TGrafoND {
         int totalPossibilities = this.n * (this.n - 1) / 2;
         return this.m == totalPossibilities;
     }
+
+    public TGrafoND getComplement() {
+        TGrafoND complement = new TGrafoND(this.n);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (this.adj[i][j] == 0) {
+                    complement.insereA(i, j);
+                }
+            }
+        }
+
+        return complement;
+    }
+
+    public boolean isDisconnected() {
+
+
+        return false;
+    }
 }

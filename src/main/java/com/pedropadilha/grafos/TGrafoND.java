@@ -75,6 +75,7 @@ public class TGrafoND {
         return this.m == totalPossibilities;
     }
 
+    // Retorna o complemento do grafo
     public TGrafoND getComplement() {
         TGrafoND complement = new TGrafoND(this.n);
 
@@ -89,8 +90,31 @@ public class TGrafoND {
         return complement;
     }
 
-    public boolean isDisconnected() {
+    public void dfs(int start, boolean[] visited) {
+        visited[start] = true;
 
+        for (int i = 0; i < this.n; i++) {
+            if (adj[start][i] == 1 && !visited[i]) {
+                this.dfs(i, visited);
+            }
+        }
+    }
+
+
+    public boolean isDisconnected() {
+        int i = 1;
+        while (i < this.n) {
+            boolean[] visits = new boolean[this.n];
+            this.dfs(i, visits);
+
+            for (boolean b : visits) {
+                if (!b) {
+                    return true;
+                }
+            }
+
+            i++;
+        }
 
         return false;
     }

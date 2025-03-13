@@ -2,6 +2,7 @@ package com.pedropadilha.grafos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -60,9 +61,9 @@ public class TGrafo {
             System.out.print("\n");
             for (int w = 0; w < n; w++) {
                 if (adj[i][w] == 1) {
-                    System.out.print("Adj[" + i + "," + w + "]= 1" + " ");
+                    System.out.print("[" + i + "," + w + "]= 1" + " ");
                 } else {
-                    System.out.print("Adj[" + i + "," + w + "]= 0" + " ");
+                    System.out.print("[" + i + "," + w + "]= 0" + " ");
                 }
             }
         }
@@ -145,6 +146,172 @@ public class TGrafo {
         return complement;
     }
 
+    public void dfs(int start, boolean[] visited) {
+        visited[start] = true;
+
+        for (int i = 0; i < this.n; i++) {
+            if (this.adj[start][i] == 1 && !visited[i]) {
+                this.dfs(i, visited);
+            }
+        }
+    }
+
+    public boolean reaches(int start, int destination) {
+        if (this.adj[start][destination] == 1) {
+            return true;
+        }
+
+        boolean[] visited = new boolean[this.n];
+        return this.reaches(start, destination, visited);
+    }
+
+    public boolean reaches(int start, int destination, boolean[] visited) {
+        visited[start] = true;
+
+        if (this.adj[start][destination] == 1) {
+            return true;
+        }
+
+        for (int i = 0; i < this.n; i++) {
+            // System.out.printf("start: %d, destination: %d, current i: %d\n", start, destination, i);
+            if (this.adj[start][i] == 1 && !visited[i]) {
+                return this.reaches(i, destination, visited);
+            }
+        }
+
+        return false;
+    }
+
+    public boolean reaches(ArrayList<Integer> starts, ArrayList<Integer> destinations) {
+        boolean[] visited = new boolean[this.n];
+        return this.reaches(starts, destinations, visited);
+    }
+
+    public boolean reaches(ArrayList<Integer> starts, ArrayList<Integer> destinations, boolean[] visited) {
+        for (int start : starts) {
+            for (int destination : destinations) {
+                if (this.adj[start][destination] == 1) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean[] getReachableBy(int v) {
+        boolean[] reachableBy = new boolean[this.n];
+        this.getReachableBy(v, reachableBy);
+        return reachableBy;
+    }
+
+    public void getReachableBy(int v, boolean[] reachableBy) {
+        reachableBy[v] = true;
+
+        for (int i = 0; i < this.n; i++) {
+            if (this.adj[i][v] == 1 && !reachableBy[i]) {
+                this.getReachableBy(i, reachableBy);
+            }
+        }
+    }
+
+    // Retorna a categoria de conexidade de um grafo direcionado
+    public int getCategory() {
+        boolean[][] vvisits = new boolean[this.n][];
+
+        for (int i = 0; i < this.n; i++) {
+            boolean[] visits = new boolean[this.n];
+            dfs(i, visits);
+            vvisits[i] = visits;
+        }
+
+        for (int i = 0; i < this.n; i++) {
+            int j = 0;
+            boolean pass = false;
+
+            while (j < this.n) {
+                if (j != i) {
+                    pass = pass || vvisits[i][j] || vvisits[j][i];
+                }
+
+                j++;
+            }
+
+            if (!pass) {
+                return 0;
+            }
+        }
+
+        boolean isC2 = true;
+        boolean isC3 = true;
+
+        // check pair reachability
+        for (int i = 0; i < this.n; i++) {
+            for (int j = i; j < this.n; j++) {
+                // check if pair (i,j) is reachable:
+
+                isC2 = isC2 && vvisits[i][j];
+
+                if (isC2) {
+                    isC3 = isC3 && vvisits[j][i];
+                }
+
+            }
+        }
+
+        if (isC3) {
+            return 3;
+        } else if (isC2) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    public TGrafo getReducedGraph() {
+        boolean[] reduced = new boolean[this.n];
+        ArrayList<ArrayList<Integer>> components = new ArrayList<>();
+
+        for (int i = 0; i < this.n; i++) {
+            if (reduced[i]) {
+                continue;
+            }
+
+            boolean[] reaches = new boolean[this.n];
+            dfs(i, reaches);
+            boolean[] isReachedBy = this.getReachableBy(i);
+
+            ArrayList<Integer> intersection = new ArrayList<>();
+            for (int j = 0; j < this.n; j++) {
+                if (reaches[j] && isReachedBy[j]) {
+                    intersection.add(j);
+                }
+            }
+
+            components.add(intersection);
+            for (int j : intersection) {
+                reduced[j] = true;
+            }
+        }
+
+        TGrafo reducedGraph = new TGrafo(components.size());
+
+        System.out.println(components);
+
+        for (int i = 0; i < components.size(); i++) {
+            for (int j = 0; j < components.size(); j++) {
+                if (i == j) {
+                    continue;
+                }
+
+                if (reaches(components.get(i), components.get(j))) {
+                    reducedGraph.insereA(i, j);
+                }
+            }
+        }
+
+        return reducedGraph;
+    }
 
     // Retorna se o grafo é simétrico
     public static boolean isSymmetric(int[][] adj) {
@@ -186,5 +353,4 @@ public class TGrafo {
 
         return null;
     }
-
 }

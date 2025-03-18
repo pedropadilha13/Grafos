@@ -1,4 +1,4 @@
-package com.pedropadilha.grafos;
+package com.pedropadilha.grafos.ma;
 
 import java.io.File;
 import java.io.FileNotFoundException;

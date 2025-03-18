@@ -1,4 +1,4 @@
-package com.pedropadilha.grafos;
+package com.pedropadilha.grafos.ma;
 
 /**
  * @author pedropadilha
@@ -16,7 +16,7 @@ public class Grafos {
         g.insereA(2, 3);
         g.insereA(1, 3);
         // mostra o grafo preenchido
-        // g.show();
+         g.show();
 
 
         /*
@@ -46,7 +46,6 @@ public class Grafos {
         System.out.println("Grau de saída do vértice 2: " + g.outDegree(2));
 
 
-
         /*
          * Exercício 3
          * Fazer o método degree(int v) que calcula o grau do vértice de um grafo dirigido. O método deve ser
@@ -57,8 +56,6 @@ public class Grafos {
         System.out.println("Grau do vértice 0: " + g.degree(0));
         System.out.println("Grau do vértice 1: " + g.degree(1));
         System.out.println("Grau do vértice 2: " + g.degree(2));
-
-
 
         /*
          * Exercício 4
@@ -72,8 +69,6 @@ public class Grafos {
         System.out.printf("O vértice %d%s é uma fonte.\n", 1, g.isSource(1) ? "" : " não");
         System.out.printf("O vértice %d%s é uma fonte.\n", 2, g.isSource(2) ? "" : " não");
         System.out.printf("O vértice %d%s é uma fonte.\n", 3, g.isSource(3) ? "" : " não");
-
-
 
         /*
          * Exercício 5
@@ -139,7 +134,6 @@ public class Grafos {
         if (fileGraph != null) {
             fileGraph.show();
         }
-
 
         /*
          * Exercício 8
@@ -363,112 +357,21 @@ public class Grafos {
 
         TGrafo reduced = full.getReducedGraph();
         reduced.show();
-//
-//
-//        /*
-//         * Exercício 18
-//         * Modifique a classe TGrafo e os métodos correspondentes para permitir a criação de um grafo direcionado
-//         * rotulado (valor float) nas arestas.
-//         */
-//        System.out.println("\nExercício 18");
-//
-//        System.out.println("--- Lista de Adjacência – Grafos Direcionados e Não direcionados ---");
-//
-//        /*
-//         * Exercício 19
-//         * Escreva um método “int inDegree(int v)” que calcula e retorna o grau de entrada de um vértice v de um grafo dirigido fazendo uso da lista de adjacência.
-//         */
-//        System.out.println("\nExercício 19");
-//
-//        /*
-//         * Exercício 20
-//         * Escreva o método outDegree(int v) que calcula o grau de saída de v em grafo dirigido. fazendo uso da lista de adjacência.
-//         */
-//        System.out.println("\nExercício 20");
-//
-//        /*
-//         * Exercício 21
-//         * Fazer o método degree(int v) que calcula o grau do vértice de um grafo dirigido fazendo uso da lista de adjacência.
-//         */
-//        System.out.println("\nExercício 21");
-//
-//        /*
-//         * Exercício 22
-//         * Escreva um método que decida se dois grafos direcionados são iguais. O método deve ser implementado para a classe TGrafo faz uso da lista de adjacência.
-//         */
-//        System.out.println("\nExercício 22");
-//
-//        /*
-//         * Exercício 23
-//         * Escreva um método que converta uma representação de um grafo em outra. Por exemplo, converta um grafo armazenado em matriz de adjacência em uma lista de adjacência.
-//         */
-//        System.out.println("\nExercício 23");
-//
-//        /*
-//         * Exercício 24
-//         * Escreva um método que receba um grafo armazenado em lista de adjacência e inverta a lista de adjacência de todos os vértices do grafo.  Por exemplo, se os 4 vizinhos de um certo vértice u aparecem na lista adj[u] na ordem v, w, x, y, então depois da aplicação do método a lista deve conter os mesmos vértices na ordem y, x, w, v. Obs.: Vizinhos são todos os vértices ligados ao vértice u.
-//         */
-//        System.out.println("\nExercício 24");
-//
-//        /*
-//         * Exercício 25
-//         * Escreva um método que receba um grafo e um vértice como parâmetro e retorne 1 se vértice for uma fonte (grau de saída maior que zero e grau de entrada igual a 0), ou 0 caso contrário. O método deve ser implementado para a classe TGrafo como lista de adjacência.
-//         */
-//        System.out.println("\nExercício 25");
-//
-//        /*
-//         * Exercício 26
-//         * Escreva um método que receba um grafo e um vértice como parâmetro, retorne 1 se vértice for um sorvedouro (grau de entrada maior que zero e grau de saída igual a 0), ou 0 caso contrário. O método deve ser implementado para a classe TGrafo que utiliza lista de adjacência.
-//         */
-//        System.out.println("\nExercício 26");
-//
-//        /*
-//         * Exercício 27
-//         * Escreva um método que receba um grafo dirigido como parâmetro e retorna 1 se o grafo for simétrico e 0 caso contrário. O método deve ser implementado  para a classe TGrafo que utiliza lista de adjacência.
-//         */
-//        System.out.println("\nExercício 27");
-//
-//        /*
-//         * Exercício 28
-//         * Um grafo pode ser armazenado em um arquivo com o seguinte formato:
-//         * 6
-//         * 8
-//         * 0 1
-//         * 0 5
-//         * 1 0
-//         * 1 5
-//         * 2 4
-//         * 3 1
-//         * 4 3
-//         * 3 5
-//         * Onde na primeira linha contém um inteiro V (vértice), na segunda contém um inteiro A (arestas) e nas demais
-//         * linha contém dois inteiros pertencentes ao intervalo 0..V-1. Se interpretarmos cada linha do arquivo como uma
-//         * aresta, podemos dizer que o arquivo define um grafo com vértices 0..V-1.
-//         * Escreva um método que receba um nome de arquivo com o formato acima e construa a representação de  lista de
-//         * adjacência do grafo.
-//         */
-//        System.out.println("\nExercício 28");
-//
-//
-//        /*
-//         * Exercício 29
-//         * Fazer um método que permita remover um vértice do Grafo (não dirigido). Não se esqueça de remover as arestas
-//         * associadas.
-//         */
-//        System.out.println("\nExercício 29");
-//
-//        /*
-//         * Exercício 30
-//         * Fazer um método que permita remover um vértice do Grafo (dirigido). Não se esqueça de remover as arestas
-//         * associadas.
-//         */
-//        System.out.println("\nExercício 30");
-//
-//        /*
-//         * Exercício 31
-//         * Fazer um método que verifique se o grafo (dirigido ou não) é completo.
-//         */
-//        System.out.println("\nExercício 31");
+
+
+        /*
+         * Exercício 18
+         * Modifique a classe TGrafo e os métodos correspondentes para permitir a criação de um grafo direcionado
+         * rotulado (valor float) nas arestas.
+         */
+        System.out.println("\nExercício 18");
+
+        TGrafoRotulado gr = new TGrafoRotulado(3);
+        gr.insereA(0, 1, 0.1f);
+        gr.insereA(1, 2, 1.2f);
+        gr.insereA(2, 0, 2.0f);
+
+        gr.show();
 
     }
 }

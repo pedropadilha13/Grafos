@@ -8,6 +8,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>17</maven.compiler.release>
-        <exec.mainClass>com.pedropadilha.grafos.Grafos</exec.mainClass>
+        <exec.mainClass>com.pedropadilha.grafos.ma.Grafos</exec.mainClass>
     </properties>
 </project>

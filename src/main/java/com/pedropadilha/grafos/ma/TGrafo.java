@@ -1,4 +1,6 @@
-package com.pedropadilha.grafos;
+package com.pedropadilha.grafos.ma;
+
+import com.pedropadilha.grafos.la.ALGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -296,8 +298,6 @@ public class TGrafo {
 
         TGrafo reducedGraph = new TGrafo(components.size());
 
-        System.out.println(components);
-
         for (int i = 0; i < components.size(); i++) {
             for (int j = 0; j < components.size(); j++) {
                 if (i == j) {
@@ -313,6 +313,21 @@ public class TGrafo {
         return reducedGraph;
     }
 
+    // Converte o TGrafo para um ALGraph
+    public ALGraph convert() {
+        ALGraph converted = new ALGraph(this.n);
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (this.adj[i][j] == 1) {
+                    converted.insertEdge(i, j);
+                }
+            }
+        }
+
+        return converted;
+    }
+
     // Retorna se o grafo é simétrico
     public static boolean isSymmetric(int[][] adj) {
         for (int i = 0; i < adj.length; i++) {
@@ -326,6 +341,7 @@ public class TGrafo {
         return true;
     }
 
+    // Retorna o grafo criado com as especificações de um arquivo
     public static TGrafo createFromFile(String path) {
         try {
             File graphFile = new File(path);

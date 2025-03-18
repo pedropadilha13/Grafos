@@ -1,4 +1,4 @@
-package com.pedropadilha.grafos;
+package com.pedropadilha.grafos.ma;
 
 /**
  * @author pedropadilha

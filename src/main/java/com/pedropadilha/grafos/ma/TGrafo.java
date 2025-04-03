@@ -5,6 +5,8 @@ import com.pedropadilha.grafos.la.ALGraph;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -156,6 +158,34 @@ public class TGrafo {
                 this.dfs(i, visited);
             }
         }
+    }
+
+    public ArrayList<Integer> bfs(int start, boolean[] visited) {
+        Queue<Integer> q = new LinkedList<>();
+
+        visited[start] = true;
+        q.add(start);
+
+        ArrayList<Integer> order = new ArrayList<>();
+
+        while (!q.isEmpty()) {
+            int current = q.poll();
+
+            order.add(current);
+
+            for (int i = 0; i < this.n; i++) {
+                if (this.adj[current][i] == 0) {
+                    continue;
+                }
+
+                if (!visited[i]) {
+                    visited[i] = true;
+                    q.add(i);
+                }
+            }
+        }
+
+        return order;
     }
 
     public boolean reaches(int start, int destination) {

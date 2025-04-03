@@ -3,7 +3,7 @@ package com.pedropadilha.grafos.ma;
 /**
  * @author pedropadilha
  */
-public class Grafos {
+public class Lista1 {
 
     public static void main(String[] args) {
         //  chama o construtor para criar um grafo 4x4

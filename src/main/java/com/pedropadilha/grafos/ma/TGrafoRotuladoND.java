@@ -2,7 +2,6 @@ package com.pedropadilha.grafos.ma;
 
 import com.pedropadilha.grafos.buscaapt.Edge;
 import com.pedropadilha.grafos.buscaapt.UnsupportedGraphTypeException;
-import dnl.utils.text.table.TextTable;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,6 +9,9 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
+/**
+ * @author pedropadilha13
+ */
 public class TGrafoRotuladoND {
     private final int n;
     private int edgeCount;
@@ -34,23 +36,14 @@ public class TGrafoRotuladoND {
     }
 
     public void print() {
-
-        Object[][] data = new Object[this.n][];
-
-        for (int i = 0; i < this.n; i++) {
-            Object[] row = new Object[this.n + 1];
-            row[0] = this.vNames[i];
-
-            for (int j = 0; j < this.n; j++) {
-                row[j + 1] = this.adj[i][j];
+        for (int i = 0; i < n; i++) {
+            System.out.print("\n");
+            for (int j = 0; j < n; j++) {
+                StringBuilder current = new StringBuilder(String.valueOf(adj[i][j]));
+                current.append(" ".repeat(Math.max(0, 5 - current.length())));
+                System.out.print(current);
             }
-
-            data[i] = row;
         }
-
-        TextTable tt = new TextTable(vNames, data);
-
-        tt.printTable();
     }
 
     public void insert(int v, int u, int w) {
@@ -152,10 +145,9 @@ public class TGrafoRotuladoND {
     }
 
     public static TGrafoRotuladoND createFromFile(String path) {
-        try {
-            File graphFile = new File(path);
-            Scanner fileReader = new Scanner(graphFile);
+        File graphFile = new File(path);
 
+        try (Scanner fileReader = new Scanner(graphFile)) {
             int type = fileReader.nextInt();
 
             if (type != 2) {
@@ -163,6 +155,7 @@ public class TGrafoRotuladoND {
             }
 
             int verticesCount = fileReader.nextInt();
+            fileReader.nextLine();
 
             TGrafoRotuladoND graph = new TGrafoRotuladoND(verticesCount);
 
@@ -201,10 +194,16 @@ public class TGrafoRotuladoND {
     public boolean exportToFile(String path) {
         try {
             File graphFile = new File(path);
-            boolean deleted = graphFile.delete();
 
-            if (!deleted) {
-                throw new Exception("Erro ao deletar arquivo.");
+            if (graphFile.exists()) {
+                System.out.println("File found, attempting to delete...");
+                boolean deleted = graphFile.delete();
+
+                if (!deleted) {
+                    throw new Exception("Erro ao deletar arquivo.");
+                } else {
+                    System.out.println("File deleted");
+                }
             }
 
             FileWriter fileWriter = new FileWriter(path);
@@ -214,16 +213,26 @@ public class TGrafoRotuladoND {
             writer.println(this.n);
 
             for (int i = 0; i < this.n; i++) {
-                writer.printf("%d %s%n", i, this.vNames[i]);
+                String current = this.vNames[i];
+                if (current != null) {
+                    writer.printf("%d %s%n", i, current);
+                }
             }
 
             writer.println(this.edgeCount);
 
             for (int i = 0; i < this.n; i++) {
-                for (int j = i + 1; j < this.n; j++) {
-                    writer.printf("%d %d %d%n", i, j, this.adj[i][j]);
+                if (vNames[i] != null) {
+                    for (int j = i + 1; j < this.n; j++) {
+                        if (vNames[j] != null) {
+                            writer.printf("%d %d %d%n", i, j, this.adj[i][j]);
+                        }
+                    }
                 }
             }
+
+            writer.flush();
+            writer.close();
 
             return true;
 

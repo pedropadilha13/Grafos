@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Scanner;
 
 /**
- * @author pedropadilha
+ * @author pedropadilha13
  */
 public class ALGraph {
     private final int n;

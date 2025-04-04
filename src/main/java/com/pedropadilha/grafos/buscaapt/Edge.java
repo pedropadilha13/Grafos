@@ -1,5 +1,8 @@
 package com.pedropadilha.grafos.buscaapt;
 
+/**
+ * @author pedropadilha13
+ */
 public class Edge {
     public int v;
     public int u;

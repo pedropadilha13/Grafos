@@ -1,2 +1,15 @@
-com/pedropadilha/grafos/Grafos.class
-com/pedropadilha/grafos/TGrafo.class
+com\pedropadilha\grafos\buscaapt\UnsupportedGraphTypeException.class
+com\pedropadilha\grafos\ma\Lista1.class
+com\pedropadilha\grafos\la\Main.class
+com\pedropadilha\grafos\ma\Dijkstra.class
+com\pedropadilha\grafos\la\ALGraphND.class
+com\pedropadilha\grafos\ma\TGrafoRotulado.class
+com\pedropadilha\grafos\ma\TGrafoND.class
+com\pedropadilha\grafos\buscaapt\Edge.class
+com\pedropadilha\grafos\ma\ListaBusca.class
+com\pedropadilha\grafos\buscaapt\Main.class
+com\pedropadilha\grafos\buscaapt\Generator.class
+com\pedropadilha\grafos\la\ALGraph.class
+com\pedropadilha\grafos\ma\TGrafoRotuladoND.class
+com\pedropadilha\grafos\ma\TGrafo.class
+com\pedropadilha\grafos\buscaapt\Apt.class

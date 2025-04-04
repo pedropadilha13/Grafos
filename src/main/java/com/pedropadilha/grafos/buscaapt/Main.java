@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
+/**
+ * @author pedropadilha13
+ */
 public class Main {
     final static String FILE_NAME = "grafo.txt";
     static Scanner s = new Scanner(System.in);
@@ -26,6 +28,8 @@ public class Main {
 
                     if (graph == null) {
                         System.err.println("Erro ao carregar grafo.");
+                    } else {
+                        System.out.println("Arquivo carregado com sucesso!");
                     }
 
                     break;
@@ -107,6 +111,8 @@ public class Main {
                         nge();
                         break;
                     }
+
+                    System.out.println();
 
                     break;
                 case "0":

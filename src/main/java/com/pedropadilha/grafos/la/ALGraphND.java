@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+/**
+ * @author pedropadilha13
+ */
 public class ALGraphND {
     private final int n;
     private int m;

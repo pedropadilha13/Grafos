@@ -3,7 +3,7 @@ package com.pedropadilha.grafos.la;
 import com.pedropadilha.grafos.ma.TGrafo;
 
 /**
- * @author pedropadilha
+ * @author pedropadilha13
  */
 public class Main {
     public static void main(String[] args) {

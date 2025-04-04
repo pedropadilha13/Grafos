@@ -1,5 +1,8 @@
 package com.pedropadilha.grafos.ma;
 
+/**
+ * @author pedropadilha13
+ */
 public class Dijkstra {
     public static void main(String[] args) {
         TGrafoRotuladoND grafo = new TGrafoRotuladoND(4);

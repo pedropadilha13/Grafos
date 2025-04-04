@@ -3,7 +3,7 @@ package com.pedropadilha.grafos.ma;
 import java.util.ArrayList;
 
 /**
- * @author pedropadilha
+ * @author pedropadilha13
  */
 public class ListaBusca {
     public static void main(String[] args) {

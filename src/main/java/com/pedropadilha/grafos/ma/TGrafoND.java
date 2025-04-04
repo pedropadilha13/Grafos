@@ -1,7 +1,7 @@
 package com.pedropadilha.grafos.ma;
 
 /**
- * @author pedropadilha
+ * @author pedropadilha13
  */
 public class TGrafoND {
 

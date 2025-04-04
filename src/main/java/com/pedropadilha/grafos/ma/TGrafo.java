@@ -10,7 +10,7 @@ import java.util.Queue;
 import java.util.Scanner;
 
 /**
- * @author pedropadilha
+ * @author pedropadilha13
  */
 //definição de uma estrutura Matriz de Adjacência para armezanar um grafo
 public class TGrafo {

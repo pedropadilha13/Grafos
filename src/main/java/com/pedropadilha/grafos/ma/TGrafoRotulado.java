@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * @author pedropadilha13
+ */
 public class TGrafoRotulado {
     // Atributos Privados
 
